@@ -12,22 +12,35 @@ if (projectID) {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: '/react/',
-  resolve: {
-    alias: [{ find: '@', replacement: resolve(__dirname, './src') }],
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // example : additionalData: `@import "./src/design/styles/variables";`
-        // dont need include file extend .scss
-        additionalData: fileStr,
-      },
-      postcss: {
-        plugins: [atImport({ path: path.join(__dirname, 'src`') })],
+export default defineConfig(async () => {
+  const mdx = await import('@mdx-js/rollup')
+  return {
+    base: '/react/',
+    resolve: {
+      alias: [{ find: '@', replacement: resolve(__dirname, './src') }],
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // example : additionalData: `@import "./src/design/styles/variables";`
+          // dont need include file extend .scss
+          additionalData: fileStr,
+        },
+        postcss: {
+          plugins: [atImport({ path: path.join(__dirname, 'src`') })],
+        },
       },
     },
-  },
-  plugins: [reactRefresh()],
+    plugins: [
+      {
+        enforce: 'pre',
+        ...mdx.default({
+          providerImportSource: '@mdx-js/react',
+          mdExtensions: [],
+          mdxExtensions: ['.md'],
+        }),
+      },
+      reactRefresh(),
+    ],
+  }
 })

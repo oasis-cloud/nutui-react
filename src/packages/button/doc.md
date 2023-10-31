@@ -4,6 +4,8 @@
 
 按钮用于触发一个操作，如提交表单。
 
+<CodeBlock src='button/demos/index.tsx'></CodeBlock>
+
 ## 安装
 
 ```tsx

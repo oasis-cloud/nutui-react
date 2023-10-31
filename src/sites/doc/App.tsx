@@ -14,6 +14,7 @@ import DemoPreview from '@/sites/doc/components/demo-preview'
 import Issue from '@/sites/doc/components/issue'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import routers from './router'
+import loadable from '@loadable/component'
 
 function myRemarkPlugin() {
   return (tree: any) => {
@@ -85,6 +86,7 @@ const App = () => {
 
   const scrollTitle = () => {
     let top = document.documentElement.scrollTop
+    console.log('top', top, fixed)
     if (top > 127) {
       setFixed(true)
       if (top < 142) {
@@ -110,6 +112,9 @@ const App = () => {
 
   useEffect(() => {
     document.addEventListener('scroll', scrollTitle)
+    return () => {
+      document.removeEventListener('scroll', scrollTitle)
+    }
   }, [])
 
   const [docname, setDocName] = useState('react')
@@ -133,9 +138,10 @@ const App = () => {
           <div className="doc-content-document isComponent">
             <Routes>
               {routers.map((ru, k) => {
+                const C = loadable(ru.component)
                 return (
                   <Route
-                    key={Math.random()}
+                    key={k}
                     path={ru.path}
                     element={
                       <>
@@ -172,51 +178,53 @@ const App = () => {
                             <div className="tab-item cur">React / Taro</div>
                           </div>
                         )}
-
-                        <ReactMarkdown
-                          children={ru.component}
-                          remarkPlugins={[
-                            remarkGfm,
-                            remarkDirective,
-                            myRemarkPlugin,
-                          ]}
-                          components={{
-                            code({
-                              node,
-                              inline,
-                              className,
-                              children,
-                              ...props
-                            }) {
-                              const match = /language-([^(scss)]\w+)/.exec(
-                                className || ''
-                              )
-                              return !inline && match ? (
-                                <Demoblock
-                                  text={String(children).replace(/\n$/, '')}
-                                  scss={(scssRaws as any)[ru.name + 'Scss']}
-                                >
-                                  <SyntaxHighlighter
-                                    children={String(children).replace(
-                                      /\n$/,
-                                      ''
-                                    )}
-                                    language={match[1]}
-                                    PreTag="div"
-                                    {...props}
-                                  />
-                                </Demoblock>
-                              ) : (
-                                <code className={className} {...props}>
-                                  {children}
-                                </code>
-                              )
-                            },
-                          }}
-                        />
+                        <C />
+                        {/*<ReactMarkdown*/}
+                        {/*  children={ru.component}*/}
+                        {/*  remarkPlugins={[*/}
+                        {/*    remarkGfm,*/}
+                        {/*    remarkDirective,*/}
+                        {/*    myRemarkPlugin,*/}
+                        {/*  ]}*/}
+                        {/*  components={{*/}
+                        {/*    code({*/}
+                        {/*      node,*/}
+                        {/*      inline,*/}
+                        {/*      className,*/}
+                        {/*      children,*/}
+                        {/*      ...props*/}
+                        {/*    }) {*/}
+                        {/*      const match = /language-([^(scss)]\w+)/.exec(*/}
+                        {/*        className || ''*/}
+                        {/*      )*/}
+                        {/*      return !inline && match ? (*/}
+                        {/*        <Demoblock*/}
+                        {/*          text={String(children).replace(/\n$/, '')}*/}
+                        {/*          scss={(scssRaws as any)[ru.name + 'Scss']}*/}
+                        {/*        >*/}
+                        {/*          <SyntaxHighlighter*/}
+                        {/*            children={String(children).replace(*/}
+                        {/*              /\n$/,*/}
+                        {/*              ''*/}
+                        {/*            )}*/}
+                        {/*            language={match[1]}*/}
+                        {/*            PreTag="div"*/}
+                        {/*            {...props}*/}
+                        {/*          />*/}
+                        {/*        </Demoblock>*/}
+                        {/*      ) : (*/}
+                        {/*        <code className={className} {...props}>*/}
+                        {/*          {children}*/}
+                        {/*        </code>*/}
+                        {/*      )*/}
+                        {/*    },*/}
+                        {/*  }}*/}
+                        {/*/>*/}
                       </>
                     }
-                  ></Route>
+                  >
+                    <>xxxx</>
+                  </Route>
                 )
               })}
             </Routes>

@@ -335,7 +335,7 @@ export default App
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | content | Toast文本内容 | `React.ReactNode` | `-` |
-| duration | 展示时长（秒）<br>值为 0 时，toast 不会自动消失 | `number` | `2` |
+| duration | 展示时长（秒）值为 0 时，toast 不会自动消失 | `number` | `2` |
 | position | toast展示位置 | `top` \| `center` \| `bottom` | `center` |
 | title | 标题 | `string` | `-` |
 | icon | 自定义图标 | `success` \| `fail` \| `loading` \| `warn` \| `React.ReactNode` | `-` |
