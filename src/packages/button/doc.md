@@ -18,11 +18,7 @@ import { Button } from '@nutui/nutui-react';
 
 按钮支持 `default`、`primary`、`info`、`warning`、`danger`、`success` 六种类型，默认为 `default`。
 
-[//]: # (:::demo)
-
-<CodeBlock src='button/demos/index.tsx'></CodeBlock>
-
-[//]: # (:::)
+<CodeBlock src='index.tsx'></CodeBlock>
 
 ### 填充模式
 

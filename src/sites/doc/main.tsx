@@ -19,9 +19,12 @@ const components = {
 const rootElement = document.querySelector('#doc')
 if (rootElement != null) {
   const root = ReactDOM.createRoot(rootElement)
+  // root.render(
+  //   <MDXProvider components={components}>
+  //     <App />
+  //   </MDXProvider>
+  // )
   root.render(
-    <MDXProvider components={components}>
       <App />
-    </MDXProvider>
   )
 }
