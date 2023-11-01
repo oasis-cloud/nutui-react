@@ -13,7 +13,6 @@ for (const path in modulesPage) {
 }
 
 const modulesENPage = import.meta.glob('/src/packages/**/doc.en-US.md')
-// console.log('modulesENPage', modulesENPage)
 for (const path in modulesENPage) {
   let name = (/packages\/(.*)\/doc\.en-US\.md/.exec(path) as any[])[1]
   routes.push({
@@ -24,7 +23,6 @@ for (const path in modulesENPage) {
 }
 
 const modulesTaroPage = import.meta.glob('/src/packages/**/doc.taro.md')
-// console.log('modulesTaroPage', modulesTaroPage)
 for (const path in modulesTaroPage) {
   let name = (/packages\/(.*)\/doc\.taro\.md/.exec(path) as any[])[1]
   routes.push({

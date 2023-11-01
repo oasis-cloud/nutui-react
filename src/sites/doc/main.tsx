@@ -1,31 +1,22 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
+import { MDXProvider } from '@mdx-js/react'
 import * as ReactDOM from 'react-dom/client'
+import App from './App'
 import { isMobile } from '@/sites/assets/util'
+import CodeBlock from './components/demoblock/codeblock'
 import '@/sites/assets/styles/reset.scss'
 import '@/styles/theme-default.scss'
 import '@/sites/assets/styles/md-style.scss'
-import App from './App'
-import {MDXProvider} from '@mdx-js/react'
-
-const modules = import.meta.glob('@/packages/button/demos/*.tsx', { as: 'raw', eager: true })
-
-
 
 if (isMobile) {
   location.replace('demo.html')
 }
 
-const CodeBlock: FunctionComponent = (props) => {
-  // replace()
-  return <>{modules['/src/packages/' + props.src]}</>
-}
-
 const components = {
-  CodeBlock
+  CodeBlock,
 }
 
 const rootElement = document.querySelector('#doc')
-
 if (rootElement != null) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
@@ -33,5 +24,4 @@ if (rootElement != null) {
       <App />
     </MDXProvider>
   )
-  // root.render(<App />)
 }

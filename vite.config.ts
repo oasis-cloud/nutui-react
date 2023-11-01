@@ -14,6 +14,8 @@ if (projectID) {
 // https://vitejs.dev/config/
 export default defineConfig(async () => {
   const mdx = await import('@mdx-js/rollup')
+  const remarkGfm = await import('remark-gfm')
+  const remarkDirective = await import('remark-directive')
   return {
     base: '/react/',
     resolve: {
@@ -38,6 +40,7 @@ export default defineConfig(async () => {
           providerImportSource: '@mdx-js/react',
           mdExtensions: [],
           mdxExtensions: ['.md'],
+          remarkPlugins: [remarkGfm.default, remarkDirective.default],
         }),
       },
       reactRefresh(),

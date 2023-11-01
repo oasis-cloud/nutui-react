@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { compressText, copyCodeHtml, decompressText } from './basedUtil'
+import { compressText, copyCodeHtml } from './basedUtil'
 interface A {
   text: string
   scss: string
@@ -8,6 +8,7 @@ interface A {
 const DemoBlock: React.FunctionComponent<A> = (props) => {
   const [onlineUrl, setOnlineUrl] = useState('')
   useEffect(() => {
+    console.log('DemoBlock', 'test')
     const sourceMainReactJsStr = `//import VConsole from "vconsole";
 //var vConsole = new VConsole();
 import React from "react";
@@ -35,7 +36,7 @@ ReactDOM.render(
   return (
     <>
       {props.children}
-      <div className="online-code nutui-react--demo-button">
+      <div className="online-code">
         <div className="online-part">
           <a className="list" target="_blank" href={onlineUrl} rel="noreferrer">
             <img

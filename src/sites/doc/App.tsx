@@ -86,18 +86,17 @@ const App = () => {
 
   const scrollTitle = () => {
     let top = document.documentElement.scrollTop
-    console.log('top', top, fixed)
-    if (top > 127) {
-      setFixed(true)
-      if (top < 142) {
-        setHidden(true)
-      } else {
-        setHidden(false)
-      }
-    } else {
-      setFixed(false)
-      setHidden(false)
-    }
+    // if (top > 127) {
+    //   setFixed(true)
+    //   if (top < 142) {
+    //     setHidden(true)
+    //   } else {
+    //     setHidden(false)
+    //   }
+    // } else {
+    //   setFixed(false)
+    //   setHidden(false)
+    // }
   }
 
   const switchDoc = (name: string) => {
