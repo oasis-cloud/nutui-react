@@ -16,6 +16,7 @@ if (isMobile) {
 }
 
 const CodeBlock: FunctionComponent = (props) => {
+  // replace()
   return <>{modules['/src/packages/' + props.src]}</>
 }
 
