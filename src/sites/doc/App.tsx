@@ -67,17 +67,17 @@ const App = () => {
 
   const scrollTitle = () => {
     let top = document.documentElement.scrollTop
-    // if (top > 127) {
-    //   setFixed(true)
-    //   if (top < 142) {
-    //     setHidden(true)
-    //   } else {
-    //     setHidden(false)
-    //   }
-    // } else {
-    //   setFixed(false)
-    //   setHidden(false)
-    // }
+    if (top > 127) {
+      setFixed(true)
+      if (top < 142) {
+        setHidden(true)
+      } else {
+        setHidden(false)
+      }
+    } else {
+      setFixed(false)
+      setHidden(false)
+    }
   }
 
   const switchDoc = (name: string) => {
@@ -122,7 +122,7 @@ const App = () => {
                   0,
                   ru.component.name.lastIndexOf('/')
                 )
-                const C = loadable(ru.component)
+                const C = useMemo(() => loadable(ru.component), [ru.component])
                 return (
                   <Route
                     key={k}
@@ -164,6 +164,7 @@ const App = () => {
                             </div>
                           )}
                           <C />
+                          <div style={{height: '10000px', backgroundColor: 'red'}}></div>
                         </MDXProvider>
                       </APPContext.Provider>
                     }
