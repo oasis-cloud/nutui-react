@@ -50,7 +50,7 @@ describe('configprovider', () => {
     const ele = container.querySelector('.nut-configprovider')
     expect(ele).toHaveTextContent('確認')
     expect(ele).toHaveClass('nut-configprovider')
-    expect(ele).toHaveStyle('--nutui-color-primary: red')
+    expect(document.documentElement).toHaveStyle('--nutui-color-primary: red')
   })
 
   test('should theme variable and locale variable injection correctly', () => {
@@ -78,8 +78,8 @@ describe('configprovider', () => {
     const ele = container.querySelector('.nut-configprovider')
     expect(ele).toHaveTextContent('Save')
     expect(ele).toHaveClass('nut-configprovider bb')
-    expect(ele).toHaveStyle(
-      '--nutui-color-primary: green; --nutui-color-primary-stop-1: green; --nutui-color-primary-stop-2: green; margin: 8px;'
+    expect(document.documentElement).toHaveStyle(
+      '--nutui-color-primary: green; --nutui-color-primary-stop-1: green; --nutui-color-primary-stop-2: green;'
     )
   })
 })

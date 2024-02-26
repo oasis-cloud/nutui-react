@@ -1,4 +1,9 @@
-import React, { FunctionComponent, createContext, useContext } from 'react'
+import React, {
+  FunctionComponent,
+  createContext,
+  useContext,
+  useEffect,
+} from 'react'
 import classNames from 'classnames'
 import kebabCase from 'lodash.kebabcase'
 import isequal from 'lodash.isequal'
@@ -75,12 +80,21 @@ export const ConfigProvider: FunctionComponent<
     return convertThemeVarsToCSSVars(mergedConfig.theme || {})
   }, [mergedConfig.theme])
 
+  useEffect(() => {
+    const styleString = Object.keys(cssVarStyle)
+      .map((key) => `${key}:${cssVarStyle[key]}`)
+      .join(';')
+    document.documentElement.setAttribute('style', styleString)
+    return () => {
+      document.documentElement.setAttribute('style', '')
+    }
+  }, [cssVarStyle])
+
   return (
     <ConfigContext.Provider value={mergedConfig}>
       <div
         className={classNames(classPrefix, className)}
         style={{
-          ...cssVarStyle,
           ...style,
           direction,
         }}
